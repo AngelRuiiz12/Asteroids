@@ -27,6 +27,7 @@ def main():
         # Con Screen.fill("black") hacemos que la pantalla se rellene de color negro.
         screen.fill("black")
 
+        player.update(dt)
         # Dibujamos el triangulo del player
         player.draw(screen)
 
