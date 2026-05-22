@@ -2,6 +2,7 @@ import pygame
 
 from constants import SCREEN_HEIGHT, SCREEN_WIDTH
 from logger import log_state
+from player import Player
 
 
 def main():
@@ -11,6 +12,8 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     dt = 0.0
+
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
     while True:
         log_state()  # Log para que Boot.dev pueda comprobar que el programa funciona.
@@ -23,6 +26,9 @@ def main():
 
         # Con Screen.fill("black") hacemos que la pantalla se rellene de color negro.
         screen.fill("black")
+
+        # Dibujamos el triangulo del player
+        player.draw(screen)
 
         dt = clock.tick(60) / 1000
         # display.flip() sirve para refrescar la pantalla.
