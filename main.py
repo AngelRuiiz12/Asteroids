@@ -9,6 +9,8 @@ def main():
     pygame.init()
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    clock = pygame.time.Clock()
+    dt = 0.0
 
     while True:
         log_state()  # Log para que Boot.dev pueda comprobar que el programa funciona.
@@ -22,6 +24,7 @@ def main():
         # Con Screen.fill("black") hacemos que la pantalla se rellene de color negro.
         screen.fill("black")
 
+        dt = clock.tick(60) / 1000
         # display.flip() sirve para refrescar la pantalla.
         # Debe ir siempre al final de loop
         pygame.display.flip()
