@@ -1,5 +1,7 @@
 import pygame
 
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 from constants import SCREEN_HEIGHT, SCREEN_WIDTH
 from logger import log_state
 from player import Player
@@ -13,7 +15,17 @@ def main():
     clock = pygame.time.Clock()
     dt = 0.0
 
+    # Groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
+
+    Player.containers = (updatable, drawable)
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = updatable
+
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    asteroid_field = AsteroidField()
 
     while True:
         log_state()  # Log para que Boot.dev pueda comprobar que el programa funciona.
@@ -27,9 +39,10 @@ def main():
         # Con Screen.fill("black") hacemos que la pantalla se rellene de color negro.
         screen.fill("black")
 
-        player.update(dt)
+        updatable.update(dt)
         # Dibujamos el triangulo del player
-        player.draw(screen)
+        for item in drawable:
+            item.draw(screen)
 
         dt = clock.tick(60) / 1000
         # display.flip() sirve para refrescar la pantalla.
