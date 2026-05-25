@@ -53,6 +53,13 @@ def main():
                 print("Game over!")
                 sys.exit()
 
+        for asteroid in asteroids:
+            for shot in shots:
+                if shot.collides_with(asteroid):
+                    log_event("asteroid_shot")
+                    asteroid.kill()
+                    shot.kill()
+
         # Dibujamos el triangulo del player
         for item in drawable:
             item.draw(screen)
